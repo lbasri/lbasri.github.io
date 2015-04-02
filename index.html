@@ -1,1 +1,157 @@
-Hello
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Calligraphy</title>    
+    <style type="text/css">
+      body{
+        font-family: Arial, sans-serif;
+        padding: 30px;
+      }
+      .header{
+        margin: 25px auto;
+        text-align: center;
+        color: gray;    
+      }
+      #map-canvas { 
+        height: 100%; margin: 0; padding: 0;
+      }
+      #map-canvas{
+        width: 90%;
+        height: 500px;
+        margin: 0 auto;
+      }
+      .image{
+        float: left;
+        width: 30%;
+        padding: 6px 15px 6px 0;
+      }
+      .bodyContent{
+        float: left;
+        width: 67%;
+      }
+      .image-horse{
+        width: 400px;
+      }
+      .example_block{
+        position:absolute;
+      }
+
+
+    </style>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsN66JHyTTi8dAIIVsfNBqLo6zGO8pq68">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+        var saudi = new google.maps.LatLng(21.4360154,39.8465466);
+        var iran = new google.maps.LatLng(38.0803683,46.293726);
+        var iraq = new google.maps.LatLng(30.5312365,47.7720309);
+
+        var mapOptions = {
+          zoom: 4,
+          center: iraq
+        };
+
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+
+        var saudiContent = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<img class="image" src="http://arabetics.com/public/html/more/History%20of%20the%20Arabic%20Script_article_files/image018.gif" />'+
+              '<div class="bodyContent">'+
+            '<h2 class="firstHeading">Early development</h2>'+
+            '<p>In the 4th century A.D., the Arabic language had two written scripts. One was an unnamed cursive (or rounded) script used for correspondence and other practical purposes. The other was a formal, angular script used mostly for writing the Koran. This second script and its variants are commonly referred to as the <b>Kufic script.</b></p>'+
+            '</div>'+
+            '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+            content: saudiContent
+        });
+
+        var markerSaudi = new google.maps.Marker({
+            position: saudi,
+            map: map,
+            title: 'Hello saudi!'
+        }); 
+
+
+        var iranContent = '<div id="content">'+
+            '<img class="image" src="http://upload.wikimedia.org/wikipedia/commons/9/9b/Khatt-e_Nastaliq.jpg" />'+
+            '<div class="bodyContent">'+
+            '<h2 class="firstHeading">Persian calligraphy</h2>'+
+            '<p>The great Persian scripts are characterized by elongated descending strokes and short ascenders. In the 14th century Mir ‘Ali Tabrizi (1360-1420) developed the Nasta‘liq script, which became the script par excellence for writing Persian poetry. One of its best practitioners was Mir ‘Imad al-Hasani (1554-1615). Other important Persian scripts were Ta‘liq and Shikaste.</p>'+
+            '</div>'+
+            '</div>';
+
+        var iranwindow = new google.maps.InfoWindow({
+            content: iranContent
+        });
+
+        var markerIran = new google.maps.Marker({
+            position: iran,
+            map: map,
+            title: 'Hello World!'
+        }); 
+
+        var iraqContent = '<div id="content">'+
+            '<img class="image" src="http://calligraphyqalam.com/images/thuluth1.jpg" />'+
+            '<div class="bodyContent">'+
+            '<h2 class="firstHeading">The “Six Scripts” in Baghdad</h2>'+
+            '<p>Kufic was widely used among calligraphers until the 10th century, when a host of new “cursive” scripts were developed in Baghdad during the ‘Abbasid caliphate (750-1258). These scripts were more rounded, followed specific rules of proportion, and were much easier to write than the angular Kufic. The great calligrapher Ibn Muqla (885-940) selected six scripts (al aqlam al-sitta) that became the foundation for the practice of calligraphy to come. These scripts were: Muhaqqaq, Rayhani, Thuluth, Naskh, Tawqi, Riqa</p>'+
+            '</div>'+
+            '</div>';
+
+        var iraqwindow = new google.maps.InfoWindow({
+            content: iraqContent
+        });
+
+        var markerIraq = new google.maps.Marker({
+            position: iraq,
+            map: map,
+            title: 'Hello World!'
+        }); 
+
+        google.maps.event.addListener(markerSaudi, 'click', function() {
+          infowindow.open(map,markerSaudi);
+        });  
+
+        google.maps.event.addListener(markerIran, 'click', function() {
+          iranwindow.open(map,markerIran);
+        });   
+
+        google.maps.event.addListener(markerIraq, 'click', function() {
+          iraqwindow.open(map,markerIraq);
+        });              
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+      function move(elem) {
+        var left = 0
+
+        function frame() {
+          left++  // update parameters 
+          elem.style.left = left + 'px' // show frame 
+          if (left == 200)  // check finish condition
+            clearInterval(id)
+        }
+        var id = setInterval(frame, 10) // draw every 10ms
+      }
+
+    </script>
+  </head>
+  <body>
+    <h1 class="header">Arabic Calligraphy</h1>
+    <h3 class="header">Calligraphy over time</h3>    
+    <div id="map-canvas"></div>
+    <br><br>
+
+    <h3 class="header">My Calligraphy</h3>   
+    <div onclick="move(this.children[0])" class="example_path">
+      <img class="example_block image-horse" src="http://img2.etsystatic.com/000/0/6087187/il_fullxfull.296580470.jpg" /> 
+    </div>    
+
+  </body>
+</html>
